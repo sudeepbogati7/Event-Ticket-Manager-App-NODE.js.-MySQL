@@ -1,63 +1,67 @@
 const express = require("express");
 const app = express();
-const { Sequelize } = require("sequelize");
+app.use(express.json());
 
-//models :
-const EventModel = require("./models/event");
-const TicketModel = require("./models/ticket");
-const config = require("./config/config");
-const OrganizerModel = require("./models/organizer");
-const UserModel = require('./models/user');
+const sequelize = require('./connection');
+
+
+// models :
+require("./models/event")(sequelize);
+require("./models/ticket")(sequelize);
+require("./models/organizer")(sequelize);
+require('./models/user')(sequelize);
+
+
+
+
+
 const bodyParser = require("body-parser");
 
 
-const sequelize = new Sequelize(
-  config.development.databse,
-  config.development.username,
-  config.development.password,
-  {
-    dialect: "mysql",
-    host: "localhost",
-    logging: false,
-  }
-);
 
-const Event = EventModel(sequelize);
-const Ticket = TicketModel(sequelize);
-const Organizer = OrganizerModel(sequelize);
-const User = UserModel(sequelize);
+
+// console.log("Event from index : ",EventModel(sequelize))
+// console.log("Ticket from index : ",Ticket)
+// console.log("Organizer from index : ",Organizer)
 
 
 // associate the Ticket model ,
 // -----------------------------------------------------------
 
 
-//event associations
-Event.belongsTo(sequelize.models.Organizer, {
+// event associations
+sequelize.models.Event.belongsTo(sequelize.models.Organizer, {
   foreignKey: "organizerId",
   onDelete: "SET NULL",
 });
-Event.hasMany(sequelize.models.Ticket, {
+sequelize.models.Event.hasMany(sequelize.models.Ticket, {
   foreignKey: "eventId",
   onDelete: "SET NULL",
 });
 
 
-// ticket associations 
-Ticket.belongsTo(sequelize.models.User, {
+// // ticket associations 
+sequelize.models.Ticket.belongsTo(sequelize.models.User, {
   foreignKey: 'userId',
   onDelete: 'SET NULL',
 });
-Ticket.belongsTo(sequelize.models.Event, {
+sequelize.models.Ticket.belongsTo(sequelize.models.Event, {
   foreignKey: "eventId",
   onDelete: "CASCADE",
 });
 
 
-// user association
-User.hasMany(sequelize.models.Ticket, {
+// // user association
+sequelize.models.User.hasMany(sequelize.models.Ticket, {
   foreignKey: 'userId',
   onDelete: 'SET NULL',
+});
+
+
+//organizers association 
+sequelize.models.Organizer.hasMany(sequelize.models.Event, {
+  foreignKey: 'organizerId',
+  onDelete: 'CASCADE',
 });
 
 // -----------------------------------------------------------
@@ -65,12 +69,23 @@ User.hasMany(sequelize.models.Ticket, {
 
 const PORT = 3000 || process.env.PORT;
 
-app.use(express.json());
+
 app.use(bodyParser.json());
 
 //ticket-route 
 const ticketController = require('./routes/ticket');
 app.use('/', ticketController);
+
+//Event-route : 
+const eventController = require('./routes/event');
+app.use('/', eventController);
+
+//User - route
+
+const userController = require('./routes/user');
+app.use("/", userController);
+
+
 
 sequelize
   .authenticate()
@@ -85,13 +100,8 @@ sequelize
 
 
 
-sequelize.sync({force:true}).then(() => {
+sequelize.sync().then(() => {
   app.listen(PORT, () => {
     console.log(`Server is running on : http://localhost:${PORT}`);
   });
 });
-
-
-module.exports = {
-  sequelize,
-};

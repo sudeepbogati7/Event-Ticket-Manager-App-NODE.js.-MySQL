@@ -1,6 +1,8 @@
-const { DataTypes } = require("sequelize");
+const { DataTypes, Sequelize } = require("sequelize");
+const organizerModel  = require("./organizer");
 
 module.exports = (sequelize) => {
+  const Organizer = organizerModel(sequelize);
   const Event = sequelize.define("Event", {
     eventId: {
       type: DataTypes.UUID,
@@ -31,9 +33,18 @@ module.exports = (sequelize) => {
         },
       },
     },
+    organizerId: {
+      type: DataTypes.UUID,
+      allowNull: true,
+    },
   });
-  console.log("Event model : ", Event === sequelize.models.User);
-
-  return Event;
+  // event associations
+  // Event.belongsTo(Organizer, {
+  //   foreignKey: "organizerId",
+  //   onDelete: "SET NULL",
+  // });
+  // Event.hasMany(sequelize.models.Ticket, {
+  //   foreignKey: "eventId",
+  //   onDelete: "SET NULL",
+  // });
 };
-

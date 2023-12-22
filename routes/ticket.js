@@ -1,5 +1,5 @@
-const { Ticket }  = require('../models/ticket');
-console.log(Ticket);
+const sequelize = require('../connection');
+const Ticket = sequelize.models.Ticket;
 const express = require('express');
 const router = express.Router();
 
