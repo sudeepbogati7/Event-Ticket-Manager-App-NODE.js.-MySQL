@@ -41,6 +41,10 @@ router.get("/users/:userId", async(req, res) => {
 router.post("/users", async(req,res) => {
     try{
         const { username , email , isOrganizer } = req.body ; 
+
+        const user = User.findOne({ email});
+        if(user) return res.status(403).json({error : "Email already exists !"});
+
         const newUser = await User.create({ username,email,  isOrganizer});
         res.status(200).json(newUser);
     }
