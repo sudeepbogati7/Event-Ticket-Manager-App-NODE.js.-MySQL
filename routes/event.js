@@ -9,8 +9,8 @@ const Event = sequelize.models.Event;
 
 router.post('/events', async (req,res) => {
     try{
-        const { name , date, organizer, description } = req.body;
-        const newEvent = await Event.create({ name, date, organizer, description});
+        const { name , date, organizerId, description } = req.body;
+        const newEvent = await Event.create({ name, date, organizerId, description});
         res.status(201).json(newEvent);
         
     }catch(error) {

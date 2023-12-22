@@ -31,36 +31,36 @@ const bodyParser = require("body-parser");
 
 // event associations
 sequelize.models.Event.belongsTo(sequelize.models.Organizer, {
-  foreignKey: "organizerId",
+  foreignKey: "Events_ibfk_1",
   onDelete: "SET NULL",
 });
 sequelize.models.Event.hasMany(sequelize.models.Ticket, {
-  foreignKey: "eventId",
+  foreignKey: "Tickets_ibfk_1",
   onDelete: "SET NULL",
 });
 
 
 // // ticket associations 
 sequelize.models.Ticket.belongsTo(sequelize.models.User, {
-  foreignKey: 'userId',
+  foreignKey: 'Tickets_ibfk_2',
   onDelete: 'SET NULL',
 });
 sequelize.models.Ticket.belongsTo(sequelize.models.Event, {
-  foreignKey: "eventId",
+  foreignKey: "Tickets_ibfk_1",
   onDelete: "CASCADE",
 });
 
 
 // // user association
 sequelize.models.User.hasMany(sequelize.models.Ticket, {
-  foreignKey: 'userId',
+  foreignKey: 'Tickets_ibfk_2',
   onDelete: 'SET NULL',
 });
 
 
 //organizers association 
 sequelize.models.Organizer.hasMany(sequelize.models.Event, {
-  foreignKey: 'organizerId',
+  foreignKey: 'Events_ibfk_1',
   onDelete: 'CASCADE',
 });
 
@@ -100,7 +100,7 @@ sequelize
 
 
 
-sequelize.sync().then(() => {
+sequelize.sync({ force: true }).then(() => {
   app.listen(PORT, () => {
     console.log(`Server is running on : http://localhost:${PORT}`);
   });
