@@ -1,0 +1,35 @@
+version: '3.3'
+
+services:
+  # Node.js application
+  app:
+    image: node:20
+    container_name: event-ticket-app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      - NODE_ENV=production
+    networks:
+      - my-network
+    volumes:
+      - ./config:/usr/src/app/config
+
+  # MySQL database
+  db:
+    image: mysql:latest
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: MySql@080
+      MYSQL_DATABASE: event-ticket-manager
+      MYSQL_USER: sudeep
+      MYSQL_PASSWORD: sudeep1234
+    ports:
+      - "3306:3306"
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge
