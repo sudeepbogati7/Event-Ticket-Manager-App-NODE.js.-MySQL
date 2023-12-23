@@ -1,18 +1,18 @@
+'use strict';
 const { DataTypes } = require('sequelize');
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Users', {
-      userId: {
+    await queryInterface.createTable('Organizers', {
+      organizerId: {
         type: DataTypes.UUID,
         defaultValue: Sequelize.UUIDV4,
         allowNull: false,
         primaryKey: true,
       },
-      username: {
+      name: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
       },
       email: {
         type: DataTypes.STRING,
@@ -21,10 +21,6 @@ module.exports = {
         validate: {
           isEmail: true,
         },
-      },
-      isOrganizer: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
       },
       createdAt: {
         allowNull: false,
@@ -38,6 +34,6 @@ module.exports = {
   },
 
   down: async (queryInterface) => {
-    await queryInterface.dropTable('Users');
+    await queryInterface.dropTable('Organizers');
   },
 };

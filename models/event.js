@@ -38,13 +38,14 @@ module.exports = (sequelize) => {
       allowNull: true,
     },
   });
-  // event associations
-  // Event.belongsTo(Organizer, {
-  //   foreignKey: "organizerId",
-  //   onDelete: "SET NULL",
-  // });
-  // Event.hasMany(sequelize.models.Ticket, {
-  //   foreignKey: "eventId",
-  //   onDelete: "SET NULL",
-  // });
 };
+
+// event associations
+// Event.belongsTo(Organizer, {
+//   foreignKey: "organizerId",
+//   onDelete: "SET NULL",
+// });
+// Event.hasMany(sequelize.models.Ticket, {
+//   foreignKey: "eventId",
+//   onDelete: "SET NULL",
+// });

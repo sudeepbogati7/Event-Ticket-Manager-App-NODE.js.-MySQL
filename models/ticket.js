@@ -36,7 +36,11 @@ module.exports = (sequelize) => {
     }
   );
 
-  // Ticket.belongsTo(sequelize.models.Organizer, {
+
+  console.log("Orgaizer from ticket mdel : ",sequelize.models.Organizer);
+
+};
+// Ticket.belongsTo(sequelize.models.Organizer, {
   //   foreignKey: "organizerId",
   //   onDelete: "SET NULL",
   // });
@@ -44,6 +48,3 @@ module.exports = (sequelize) => {
   //   foreignKey: "eventId",
   //   onDelete: "CASCADE",
   // });
-
-  console.log("Orgaizer from ticket mdel : ",sequelize.models.Organizer);
-};
