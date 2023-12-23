@@ -4,12 +4,13 @@ const router = express();
 const User = sequelize.models.User; //user-model 
 console.log("User model from user route:", User);
 
+const validate = require('../middlewares/validation');
 
 // get all the users 
 router.get("/users", async (req, res) => {
     try{
         const users = await User.findAll();
-        if(!users) return res.status(404).json({message : "No user found !"});
+        if(!users) return res.status(404).json({error : "No user found !"});
         res.status(200).json(users);
     }
     catch(err) {
@@ -38,7 +39,7 @@ router.get("/users/:userId", async(req, res) => {
 
 //create a new user 
 
-router.post("/users", async(req,res) => {
+router.post("/users",validate.validateUser, async(req,res) => {
     try{
         const { username , email , isOrganizer } = req.body ; 
 

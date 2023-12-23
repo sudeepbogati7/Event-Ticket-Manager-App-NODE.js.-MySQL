@@ -4,7 +4,7 @@
   "description": "An application through which you can post events , check and buy tickes. ",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Sudeep Bogati",
@@ -12,6 +12,7 @@
   "dependencies": {
     "body-parser": "^1.20.2",
     "express": "^4.18.2",
+    "joi": "^17.11.0",
     "mysql2": "^3.6.5",
     "sequelize": "^6.35.2",
     "sqlite3": "^5.1.6",

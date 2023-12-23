@@ -4,7 +4,11 @@ const router = express.Router();
 
 const Organizer = sequelize.models.Organizer;
 
-router.post("/organizers/create", async (req, res) => {
+//middlewares
+const checkOrganizer = require('../middlewares/checkuser');
+const validate = require('../middlewares/validation');
+
+router.post("/organizers/create",[validate.validateOrganizer,checkOrganizer], async (req, res) => {
     try{
         const { name, email } = req.body;
          

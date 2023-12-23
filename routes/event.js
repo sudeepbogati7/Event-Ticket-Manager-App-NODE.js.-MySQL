@@ -2,17 +2,16 @@ const { ERROR } = require("sqlite3");
 const sequelize = require("../config/connection");
 const express = require('express');
 const router = express();
-
+const validation = require('../middlewares/validation');
 const Event = sequelize.models.Event;
 
 //create an event 
 
-router.post('/events', async (req,res) => {
+router.post('/events',validation.validateEvent, async (req,res) => {
     try{
         const { name , date, organizerId, description } = req.body;
         const newEvent = await Event.create({ name, date, organizerId, description});
         res.status(201).json(newEvent);
-        
     }catch(error) {
         console.log("Error while creating event : ", error);
         res.status(500).json({error : "Error creating event "});

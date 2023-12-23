@@ -3,11 +3,11 @@ const Ticket = sequelize.models.Ticket;
 const Event = sequelize.models.Event;
 const express = require('express');
 const router = express.Router();
-
+const validate = require('../middlewares/validation');
 
 
 // create a new ticket , 
-router.post('/tickets/create', async (req, res) => {
+router.post('/tickets/create',validate.validateTicket, async (req, res) => {
     
     try{
         const transaction =  await sequelize.transaction();
