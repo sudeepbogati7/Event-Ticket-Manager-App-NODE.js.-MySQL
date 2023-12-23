@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 app.use(express.json());
 
-const sequelize = require('./connection');
+const sequelize = require('./config/connection');
 
 
 // models :
@@ -68,7 +68,6 @@ sequelize.models.Organizer.hasMany(sequelize.models.Event, {
 
 
 const PORT = 3000 || process.env.PORT;
-
 
 app.use(bodyParser.json());
 

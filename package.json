@@ -1,10 +1,10 @@
 {
   "name": "event-ticketing-system",
   "version": "1.0.0",
-  "description": "An application through which you can post events , check and buy tickes and many more ",
+  "description": "An application through which you can post events , check and buy tickes. ",
   "main": "index.js",
   "scripts": {
-    "start-dev": "nodemon index.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Sudeep Bogati",

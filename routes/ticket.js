@@ -1,4 +1,4 @@
-const sequelize = require('../connection');
+const sequelize = require('../config/connection');
 const Ticket = sequelize.models.Ticket;
 const Event = sequelize.models.Event;
 const express = require('express');

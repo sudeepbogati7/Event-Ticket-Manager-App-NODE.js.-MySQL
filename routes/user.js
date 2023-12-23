@@ -1,5 +1,5 @@
 const express = require('express');
-const sequelize = require('../connection');
+const sequelize = require('../config/connection');
 const router = express();
 const User = sequelize.models.User; //user-model 
 console.log("User model from user route:", User);

@@ -8,7 +8,10 @@ module.exports = {
  },
  production : {
     // production configurations........
+    database: '',
+    username: '',
+    password: '',
+    host: '',
  },
 
 };
-
