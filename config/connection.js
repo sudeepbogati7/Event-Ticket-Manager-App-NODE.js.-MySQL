@@ -9,7 +9,7 @@ const sequelize = new Sequelize(
   {
     dialect: "mysql",
     host: "localhost",
-    logging: console.log,
+    logging: false,
   }
 );
 module.exports = sequelize;
