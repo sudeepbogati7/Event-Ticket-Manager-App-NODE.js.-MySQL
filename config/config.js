@@ -2,16 +2,16 @@ module.exports = {
  development : {
     username : 'root',
     password : 'MySql@080',
-    databse : 'event_ticket_manager',
+    database : 'event_ticket_manager',
     host : 'localhost',
     dialect : 'mysql',
  },
  production : {
-    // production configurations........
-    database: '',
-    username: '',
-    password: '',
-    host: '',
+    username : 'sudeep',
+    password : 'sudeep1234',
+    database : 'event_ticket_manager',
+    host : 'localhost',
+    dialect : 'mysql',
  },
 
-};
+}; 

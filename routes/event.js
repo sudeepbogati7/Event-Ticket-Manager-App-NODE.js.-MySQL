@@ -1,4 +1,3 @@
-const { ERROR } = require("sqlite3");
 const sequelize = require("../config/connection");
 const express = require('express');
 const router = express();
