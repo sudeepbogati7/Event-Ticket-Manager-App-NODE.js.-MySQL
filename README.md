@@ -1,9 +1,3 @@
-```python
--$ cowsay "Hello Github ! Will be completing this soon ....."
-```
-$${\color{red}PROJECT - UNDER - CONSTRUCTION}$$
-
-
 # Event Ticketing Platform:
 **An application which stores Events details and information about tickets. You can look up to the events and its details also**
 
