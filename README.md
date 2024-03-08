@@ -7,6 +7,8 @@
 3. Implemented features like ticket purchasing, event discovery, and QR code validation.
 
 
+**Tech stacks :**
 
-
-**Tools / modules :** `express` ,`sequelize` , `mysql2` , 
+- `JavaScript`, `express,js` , `Node.js` 
+- `sequelize` , `mysql2`
+- `jsonwebtoken` , `bcrypt` , `winston` 
